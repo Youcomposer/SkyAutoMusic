@@ -18,7 +18,7 @@ Using Sky: CotL AutoPlayer is straightforward:
 
 ## Demo
 
-![Link to Demo Video](https://img.youtube.com/vi/Bz05z0zL95E/0.jpg)](https://www.youtube.com/watch?v=Bz05z0zL95E)
+[![Link to Demo Video](https://img.youtube.com/vi/Bz05z0zL95E/0.jpg)](https://www.youtube.com/watch?v=Bz05z0zL95E)
 
 
 ## Contributing
