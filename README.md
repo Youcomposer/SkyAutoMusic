@@ -8,17 +8,21 @@ Sky: CotL AutoPlayer is a convenient tool designed to automate the process of pl
 
 ## Usage
 
-Using Sky: CotL AutoPlayer is straightforward:
+Adding song to the AutoPlayer:
 
+Video - https://www.youtube.com/watch?v=rTW6vJFRYAM
+
+Text Version:
 1. Go to https://sky-music.herokuapp.com/songLibrary.html and choose a song then click the save button.
 2. Then go to https://sky-music.herokuapp.com/sheetDisplayer.html and choose the song you just saved.
-3. Now scroll down copy the text and paste it into a text file in the same directory as the .py.
+3. Now scroll down copy the text and paste it into a text file.
 4. Launch the Sky: Children of the Light game.
-5. Open Sky: CotL AutoPlayer.
+5. Open Sky: CotL AutoPlayer, choose song then speed and click on the game within 3 seconds of pressing speed.
+6. To stop playing the song close the terminal.
 
 ## Demo
 
-[![Link to Demo Video](https://img.youtube.com/vi/Bz05z0zL95E/0.jpg)](https://www.youtube.com/watch?v=Bz05z0zL95E)
+[![Link to Demo Video](https://img.youtube.com/vi/VoSr77cdwOY/0.jpg)](https://www.youtube.com/watch?v=VoSr77cdwOY)
 
 
 ## Contributing
