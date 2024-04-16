@@ -1,6 +1,6 @@
 # Sky: CotL AutoPlayer
 
-![Sky: CotL AutoPlayer Logo](https://i.imgur.com/ECSHtVm.png)
+![Sky: CotL AutoPlayer Logo](https://i.imgur.com/ECSHtVm.png?size=small)
 
 ## Overview
 
