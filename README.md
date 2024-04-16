@@ -1,6 +1,6 @@
 # Sky: CotL AutoPlayer
 
-![Sky: CotL AutoPlayer Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+![Sky: CotL AutoPlayer Logo](https://imgur.com/a/8rW56Rw)
 
 ## Overview
 
