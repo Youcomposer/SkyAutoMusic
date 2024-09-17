@@ -27,7 +27,8 @@ KEY_MAPPING = {
 REPLACEMENTS = {
     "A1": "y", "A2": "u", "A3": "i", "A4": "o", "A5": "p",
     "B1": "h", "B2": "j", "B3": "k", "B4": "l", "B5": ";",
-    "C1": "n", "C2": "m", "C3": ",", "C4": ".", "C5": "/"
+    "C1": "n", "C2": "m", "C3": ",", ".":"1", "C4": ".", 
+    "C5": "/"
 }
 
 class MusicAutoPlayerApp:
@@ -106,7 +107,7 @@ class MusicAutoPlayerApp:
         speeds = {
             "slow": 0.5,
             "medium": 0.4,
-            "fast": 0.3
+            "fast": 0.35
         }
         return speeds.get(speed_key)
 
