@@ -22,7 +22,7 @@ Text Version:
 
 ## Demo
 
-[![Link to Demo Video](https://img.youtube.com/vi/VoSr77cdwOY/0.jpg)](https://www.youtube.com/watch?v=VoSr77cdwOY)
+[![Link to Demo Video](https://img.youtube.com/vi/VFsWc3f2MvE/0.jpg)](https://www.youtube.com/watch?v=VFsWc3f2MvE)
 
 
 ## Contributing
