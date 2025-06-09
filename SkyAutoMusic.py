@@ -2,81 +2,100 @@ import pydirectinput
 import time
 import threading
 import os
-from tkinter import Tk, filedialog, Button
+from tkinter import Tk, filedialog, Button, Scale, Label, HORIZONTAL, Frame
 
-# Define the speeds
-SPEED_SLOW = 0.4
-SPEED_MEDIUM = 0.5
-SPEED_FAST = 0.6
+# Key replacement dictionary
+KEY_MAP = {
+    "A1": "y", "A2": "u", "A3": "i", "A4": "o", "A5": "p",
+    "B1": "h", "B2": "j", "B3": "k", "B4": "l", "B5": "ñ",
+    "C1": "n", "C2": "m", "C3": ",", "C4": ".", "C5": "-",
+    ".": "1"
+}
 
-def replaceSent(sentence):
-    return sentence.replace("A1", "y").replace("A2", "u").replace("A3", "i").replace("A4", "o").replace("A5", "p").replace("B1", "h").replace("B2", "j").replace("B3", "k").replace("B4", "l").replace("B5", ";").replace("C1", "n").replace("C2", "m").replace("C3", ",").replace(".", "1").replace("C4", ".").replace("C5", "/")
+filename = None
+
+def replace_sent(sentence):
+    for old, new in KEY_MAP.items():
+        sentence = sentence.replace(old, new)
+    return sentence
 
 def press_keys(keys):
-    for key in keys:
+    def press_key(key):
         pydirectinput.keyDown(key)
-    time.sleep(0.1)
-    for key in keys:
+        time.sleep(0.1)
         pydirectinput.keyUp(key)
 
-def start_process(speed):
+    threads = []
+    for key in keys:
+        thread = threading.Thread(target=press_key, args=(key,))
+        thread.start()
+        threads.append(thread)
+
+    for thread in threads:
+        thread.join()
+
+def start_process(slider_value):
     global filename
-    global root
-    root.destroy()  # Close the popup window
-
-    # Read the original from the file
+    root.destroy()  
     with open(filename, "r") as file:
-        original_sentence = file.read().strip()
+        original = file.read().strip()
+    modified = replace_sent(original)
+    time.sleep(2) 
 
-    # Modify the original sentence
-    modified_sentence = replaceSent(original_sentence)
+    
+    speed = slider_value  
 
-    # Simulate typing the modified sentence
-    time.sleep(1)
     group_chars = ''
-    for char in modified_sentence:
+    for char in modified:
         if char == ' ':
             if group_chars:
-                threading.Thread(target=press_keys, args=(group_chars,)).start()
-                time.sleep(speed)  # Adjust the sleep time here
+                threading.Thread(target=press_keys, args=(list(group_chars),)).start()
+                time.sleep(speed)  
                 group_chars = ''
             else:
-                time.sleep(0.3)
+                time.sleep(0.3)  
         else:
             group_chars += char
-    if group_chars:
-        threading.Thread(target=press_keys, args=(group_chars,)).start()
 
-# Initialize tkinter
+    if group_chars:
+        threading.Thread(target=press_keys, args=(list(group_chars),)).start()
+
+# GUI setup
 root = Tk()
 root.title("Music AutoPlayer PC")
-root.geometry("300x150")
+root.geometry("400x250") 
 
-# Set custom icon using relative path
-current_dir = os.path.dirname(os.path.realpath(__file__))
-icon_path = os.path.join(current_dir, "icon.ico")
-root.iconbitmap(icon_path)
+try:
+    icon_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "icon.ico")
+    root.iconbitmap(icon_path)
+except Exception:
+    pass
 
 def choose_file():
     global filename
-    initial_dir = os.path.join(current_dir, "Songs")  # Set initial directory to current directory + Songs
-    filename = filedialog.askopenfilename(title="Select a file", initialdir=initial_dir, filetypes=(("Text files", "*.txt"), ("All files", "*.*")))
+    initial_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "Songs")
+    filename = filedialog.askopenfilename(title="Select a file", initialdir=initial_dir,
+                                          filetypes=(("Text files", "*.txt"), ("All files", "*.*")))
 
     if filename:
-        slow_button.pack()
-        medium_button.pack()
-        fast_button.pack()
+        slider_frame = Frame(root)
+        slider_frame.pack(pady=10, padx=10)
 
-# Create buttons for choosing speed
-def choose_speed(speed):
-    return lambda: start_process(speed)
+    
+        faster_label = Label(slider_frame, text="Slower", font=("Arial", 10))
+        faster_label.pack(side="left", padx=10)
 
-slow_button = Button(root, text="Slow", command=choose_speed(SPEED_SLOW))
-medium_button = Button(root, text="Medium", command=choose_speed(SPEED_MEDIUM))
-fast_button = Button(root, text="Fast", command=choose_speed(SPEED_FAST))
+        slower_label = Label(slider_frame, text="Faster", font=("Arial", 10))
+        slower_label.pack(side="right", padx=5)  
 
-# Create a button to choose a file
-choose_file_button = Button(root, text="Choose File", command=choose_file)
-choose_file_button.pack()
+    
+        speed_slider = Scale(slider_frame, from_=2.0, to=0.1, resolution=0.01, orient=HORIZONTAL, label="Speed", length=300)
+        speed_slider.set(0.5)  
+        speed_slider.pack(padx=10)
+
+        start_button = Button(root, text="Start", command=lambda: start_process(speed_slider.get()), width=20, height=2)
+        start_button.pack(pady=20)  
+
+Button(root, text="Choose File", command=choose_file, width=20, height=2).pack(pady=20)  
 
 root.mainloop()
