@@ -1,6 +1,6 @@
 # Sky: CotL AutoPlayer
 
-<img src="https://ibb.co/FkQJV8v7" alt="Sky: CotL AutoPlayer Logo" width="200">
+<img src="https://i.ibb.co/FkQJV8v7/icon-5.png" alt="Sky: CotL AutoPlayer Logo" width="200">
 
 ## Overview
 
